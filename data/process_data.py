@@ -102,9 +102,17 @@ def load_into_sql(df, database_filepath):
     This function will load the datafame to a SQL database
     '''
     
-    db = 'sqlite:///DisasterMessages.db'
+    db = 'sqlite:///' + database_filepath
+    
+    # Extract database name from the database path
+    pos = database_filepath.rindex('/') # Find the position of the last occurance of "/" 
+    db_nm = database_filepath[pos+1:]
+    db_name = db_nm.replace('.db', '') 
+    print('DB path: ', db)
+    print('DB name: ', db_name)
+    
     engine = create_engine(db)
-    df.to_sql('DisasterMessages', engine, index=False)
+    df.to_sql(db_name, engine, index=False)
     print('Data load complete!')
 
 
@@ -117,28 +125,28 @@ def main():
     load it back to a SQL database.
     '''
     if len(sys.argv) == 4:
-    	messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
+        messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
     
-    	# Load the messages dataset
-    	messages = load_data(messages_filepath) 
-    	# Load the categories dataset
-    	categories = load_data(categories_filepath) 
+        # Load the messages dataset
+        messages = load_data(messages_filepath) 
+        # Load the categories dataset
+        categories = load_data(categories_filepath) 
     
-    	# clean the categories dataset and split the 'categories' column into individual columns per category
-    	categories_clean = categories_cleaning(categories)
-    	
-    	# Merge the cleaned categories dataset and messages dataset
-    	df = data_merge(messages, categories_clean)
-    	
-    	# Load to a SQL database
-    	load_into_sql(df, database_filepath)
+        # Clean the categories dataset and split the 'categories' column into individual columns per category
+        categories_clean = categories_cleaning(categories)
+    
+        # Merge the cleaned categories dataset and messages dataset
+        df = data_merge(messages, categories_clean)
+    
+        # Load to a SQL database
+        load_into_sql(df, database_filepath)
     else:
         print('Please provide the filepaths of the messages and categories '\
               'datasets as the first and second argument respectively, as '\
               'well as the filepath of the database to save the cleaned data '\
               'to as the third argument. \n\nExample: python process_data.py '\
               'disaster_messages.csv disaster_categories.csv '\
-              'DisasterResponse.db')    
+              'DisasterResponse.db')
 
 # In[63]:
 
