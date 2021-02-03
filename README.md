@@ -7,6 +7,9 @@ The project uses the response data from various users across the world posted in
 - [Installation](#installation)
 - [Overview of repository](#overview-of-repository)
 - [How to run the code](#how-to-run-the-code)
+- [High level data preparation steps taken] (#high-level-data-preparation-steps-taken)
+- [Use the Web App] (#using-the-web-app)
+- [Summary] (#summary)
 
 ## Installation
 
@@ -74,8 +77,8 @@ The WebApp will be up and running now.
 5) Remove duplicates.
 6) Load into a SQL database and save it in the "data" folder.
 
-**ML Pipleline**
-1) Load the data from the SQL database presnet in the "data" folder.
+**ML Pipeline**
+1) Load the data from the SQL database present in the "data" folder.
 2) Perform data visualization to see the number of responses received per category.
 3) Split the dataset into train and test.
 4) Apply feature extraction techniques: CountVectorizer, TfidfTransformer.
@@ -98,3 +101,13 @@ For data visualization, 2 plots are created.
 
 ![alt text](https://github.com/hianjana/Diasater_Response_Pipeline_Project_Udacity/blob/main/plot2_bottom10.JPG)
 
+## Use the Web App
+
+To predict which category a particular message will fall under, just enter a message in the text box and click on "Classify message". The classification model that was trained earlier using the ML pipeline will classify the message into a category and the Web App will display it like this.
+
+![alt text](https://github.com/hianjana/Diasater_Response_Pipeline_Project_Udacity/blob/main/webapp.JPG)
+
+## Summary
+
+From the below data visualization, it can be seen that the data is highly imbalanced. Some of teh categories have majority of the data and some of the categories have very less responses. Hence, the model will not be able to classify responses well if they belong to a class which had very less training data. In the current project, this issue has not been handled.
+![alt text](https://github.com/hianjana/Diasater_Response_Pipeline_Project_Udacity/blob/main/data_visualization.png)
