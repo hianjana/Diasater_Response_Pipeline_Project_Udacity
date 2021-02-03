@@ -67,6 +67,8 @@ def categories_cleaning(categories):
         # convert column from string to numeric
         categories_split[column] = categories_split[column].astype('int')
     
+    categories_split['related'].replace({2: 1}, inplace=True)
+    
     categories_clean = categories.merge(categories_split, left_index=True, right_index=True, how='inner')
     
     # drop the original categories column
@@ -112,7 +114,7 @@ def load_into_sql(df, database_filepath):
     print('DB name: ', db_name)
     
     engine = create_engine(db)
-    df.to_sql(db_name, engine, index=False)
+    df.to_sql(db_name, engine, index=False, if_exists='replace')
     print('Data load complete!')
 
 
