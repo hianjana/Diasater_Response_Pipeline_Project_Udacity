@@ -95,7 +95,9 @@ def tokenize(text):
 class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     '''
     The purpose of this class is to create a feature which indicates whether or not a sentence starts with a verb.
-    It returns a True if the sentence starts with a verb or it is a re-tweet and False otherwise.
+    
+    Input: Raw text
+    Output: 0 or 1 (1 if the sentence starts with a verb or it is a re-tweet, 0 otherwise)
     '''
 
     def starting_verb(self, text):
