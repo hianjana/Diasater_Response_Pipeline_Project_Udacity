@@ -47,21 +47,25 @@ The input files used for the project are:
 There are 3 parts to this project:
 1) ETL pipeline
 2) Machine Learning pipeline
-3) Webapp
+3) Web App
 
-**To run the ETL pipeline**
+**To run the ETL pipeline:**
     ``` python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db ```
+
 This will create a SQL database in the name DisasterResponse.db under the "data" folder.
 
-**To run the ML pipeline**
+**To run the ML pipeline:**
     ``` python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl ```
+
 This will create a classification model pickle file in the name classifier.pkl under the "models" folder.
 
-**To run the Web App**
+**To run the Web App:**
 Go to the app folder and run:
     ``` python run.py ```
+    
 In a new terminal run:
     ``` env|grep WORK ```
+    
 The above command will give a SPACEID. Use the SPACEID and run the below url in a new browser.
     https://<Your SPACEID>-3001.udacity-student-workspaces.com/
 
